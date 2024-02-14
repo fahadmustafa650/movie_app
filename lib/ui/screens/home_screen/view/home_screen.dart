@@ -3,8 +3,8 @@ import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/ui/screens/home_screen/widget/movie_poster.dart';
 
-class HomeScreenWidget extends StatelessWidget {
-  const HomeScreenWidget({
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
     super.key,
   });
 

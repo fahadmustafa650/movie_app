@@ -12,14 +12,14 @@ class SearchScreen extends StatelessWidget {
       body: Column(
         children: [
           _searchTextField(),
-          SizedBox(
+          const SizedBox(
             height: 10.0,
           ),
           Expanded(
               child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 2.0,
                   mainAxisSpacing: 5.0,
@@ -27,8 +27,8 @@ class SearchScreen extends StatelessWidget {
                 itemBuilder: (ctx, index) => Container(
                       width: 200.0,
                       height: 100.0,
-                      padding: EdgeInsets.only(bottom: 20.0, left: 15.0),
-                      child: Align(
+                      padding: const EdgeInsets.only(bottom: 20.0, left: 15.0),
+                      child: const Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
                             "Superman",
@@ -36,7 +36,7 @@ class SearchScreen extends StatelessWidget {
                                 fontSize: 25.0, color: MyColors.whiteColor),
                           )),
                       decoration: BoxDecoration(
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: NetworkImage(imageUrl),
                             fit: BoxFit.cover,
                           ),
@@ -56,20 +56,20 @@ class SearchScreen extends StatelessWidget {
         height: 45.0,
         child: TextFormField(
           decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 5.0),
+              contentPadding: const EdgeInsets.only(top: 5.0),
               fillColor: MyColors.grayColor.withOpacity(0.2),
               filled: true,
               border: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: MyColors.grayColor,
                   ),
                   borderRadius: BorderRadius.circular(20.0)),
               hintText: MyStrings.searchMov,
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.search,
                 color: MyColors.grayColor,
               ),
-              suffixIcon: Icon(
+              suffixIcon: const Icon(
                 Icons.close,
                 color: MyColors.grayColor,
               )),

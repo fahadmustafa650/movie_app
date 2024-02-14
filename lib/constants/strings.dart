@@ -5,6 +5,7 @@ class MyStrings {
   static const account = "Account";
   static const favrt = 'Favourite';
   static const home = 'Home';
+  static const searchingScreen = "Searching Screen";
   static const search = 'Search';
   static const searchMov = "Search Movies";
   static const watch = "Watch";

@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
 class MainController extends GetxController {
-  final _currentIndex = 0.obs;
+  final _currentScreenIndex = 0.obs;
   //-------------------------------------------
   set currentScreenNo(int index) {
-    _currentIndex.value = index;
+    _currentScreenIndex.value = index;
   }
 
   //-------------------------------------------
-  int get currentScreenNo => _currentIndex.value;
+  int get currentScreenNo => _currentScreenIndex.value;
 }
