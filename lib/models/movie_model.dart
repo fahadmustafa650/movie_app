@@ -12,7 +12,7 @@ String moviesModelToJson(MoviesModel data) => json.encode(data.toJson());
 class MoviesModel {
   Dates dates;
   int page;
-  List<Result> results;
+  List<MovieResult> results;
   int totalPages;
   int totalResults;
 
@@ -27,8 +27,8 @@ class MoviesModel {
   factory MoviesModel.fromJson(Map<String, dynamic> json) => MoviesModel(
         dates: Dates.fromJson(json["dates"]),
         page: json["page"],
-        results:
-            List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
+        results: List<MovieResult>.from(
+            json["results"].map((x) => MovieResult.fromJson(x))),
         totalPages: json["total_pages"],
         totalResults: json["total_results"],
       );
@@ -64,7 +64,7 @@ class Dates {
       };
 }
 
-class Result {
+class MovieResult {
   bool adult;
   String backdropPath;
   List<int> genreIds;
@@ -80,7 +80,7 @@ class Result {
   double voteAverage;
   int voteCount;
 
-  Result({
+  MovieResult({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -97,13 +97,14 @@ class Result {
     required this.voteCount,
   });
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory MovieResult.fromJson(Map<String, dynamic> json) => MovieResult(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
         originalLanguage:
-            originalLanguageValues.map[json["original_language"]]!,
+            originalLanguageValues.map[json["original_language"]] ??
+                OriginalLanguage.EN,
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),

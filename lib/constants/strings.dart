@@ -3,8 +3,11 @@ const imageUrl =
 
 class MyStrings {
   static const account = "Account";
+  static const connTimeout =
+      "Connection timeout Please check your internet connection";
   static const favrt = 'Favourite';
   static const home = 'Home';
+  static const someWWrong = "Something Went Wrong";
   static const searchingScreen = "Searching Screen";
   static const search = 'Search';
   static const searchMov = "Search Movies";
