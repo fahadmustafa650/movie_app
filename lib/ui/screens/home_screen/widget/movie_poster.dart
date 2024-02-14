@@ -15,7 +15,7 @@ class MovieTitlePoster extends StatelessWidget {
       height: 200.0,
       margin: const EdgeInsets.only(
           bottom: 10.0, left: 20.0, right: 20.0, top: 20.0),
-      padding: EdgeInsets.only(bottom: 30.0),
+      padding: const EdgeInsets.only(bottom: 30.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         image: const DecorationImage(
