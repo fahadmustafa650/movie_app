@@ -10,6 +10,7 @@ import 'package:movie_app/models/movie_model.dart';
 import 'package:movie_app/services/apis/api_constants.dart';
 import 'package:movie_app/ui/screens/searched_screen/view/searched_screen.dart';
 import 'package:movie_app/ui/screens/searching_screen/view/searching_screen.dart';
+import 'package:movie_app/utils/common_methods.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({super.key});
@@ -113,7 +114,7 @@ class MovieGridPoster extends StatelessWidget {
       decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                "${ApiConstants.apiposterbaseUrl}${movieResult.posterPath}"),
+                CommonMethods.getPosterUrlByPath(movieResult.posterPath)),
             fit: BoxFit.cover,
           ),
           // color: Colors.red,

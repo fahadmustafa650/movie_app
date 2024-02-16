@@ -4,6 +4,7 @@ import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/controllers/movies_controller.dart';
 import 'package:movie_app/ui/screens/home_screen/widget/movie_poster.dart';
+import 'package:movie_app/ui/screens/movie_details/view/movie_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -24,6 +25,10 @@ class HomeScreen extends StatelessWidget {
             itemCount: controller.moviesResultList.length,
             itemBuilder: (ctx, index) => MovieTitlePoster(
               movieResult: controller.moviesResultList[index],
+              onTap: () {
+                Get.to(() => MovieDetailsScreen(
+                    movieResult: controller.moviesResultList[index]));
+              },
             ),
           );
         }),

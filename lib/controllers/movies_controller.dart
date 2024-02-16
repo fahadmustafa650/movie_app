@@ -49,6 +49,7 @@ class MoviesController extends GetxController {
       }
 
       if (response.statusCode! <= 201) {
+        moviesResultList.value = [];
         final extractedData = response.data;
         //Extraction All Data in a single Model
         final movieModel = MoviesModel.fromJson(extractedData);

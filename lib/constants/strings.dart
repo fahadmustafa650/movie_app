@@ -6,6 +6,7 @@ class MyStrings {
   static const connTimeout =
       "Connection timeout Please check your internet connection";
   static const favrt = 'Favourite';
+  static const getTkt = "Get Tickets";
   static const home = 'Home';
   static const someWWrong = "Something Went Wrong";
   static const searchingScreen = "Searching Screen";
