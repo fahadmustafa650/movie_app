@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_app/constants/colors.dart';
-import 'package:movie_app/constants/strings.dart';
+
 import 'package:movie_app/controllers/main_screen_controller.dart';
 import 'package:movie_app/ui/screens/home_screen/view/home_screen.dart';
 import 'package:movie_app/ui/screens/main_screen/widget/custom_nav_bar.dart';
@@ -19,10 +18,10 @@ class MainScreen extends StatelessWidget {
           () => IndexedStack(
             index: mainController.currentScreenNo,
             children: [
-              const HomeScreen(),
+              HomeScreen(),
               SearchScreen(),
-              SearchScreen(),
-              SearchScreen(),
+              Container(),
+              Container(),
             ],
           ),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
-import 'package:movie_app/ui/screens/home_screen/view/home_screen.dart';
-import 'package:movie_app/ui/screens/trailer_screen/view/trailer_screen.dart';
+import 'package:movie_app/controllers/genre_controllers.dart';
+import 'package:movie_app/ui/screens/main_screen/view/main_screen.dart';
 import 'services/apis/networking.dart';
 
 void main() {
@@ -13,8 +13,9 @@ void main() {
 //-------------------------------------------------------------------
 void _beforeAppRun() {
   WidgetsFlutterBinding.ensureInitialized();
-
   GetIt.I.registerSingleton<NetWorkingManager>(NetWorkingManager.instance);
+
+  Get.put(GenreControllers());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: MainScreen(),
     );
   }
 }

@@ -108,8 +108,9 @@ class _TrailerScreenState extends State<TrailerScreen> {
                 _isPlayerReady = true;
               },
               onEnded: (data) {
+                print("onEnded");
                 // _controller.load(widget.trailerId);
-                _showSnackBar('Next Video Started!');
+                Get.back();
               },
             ),
             builder: (context, player) => Scaffold(
@@ -120,7 +121,8 @@ class _TrailerScreenState extends State<TrailerScreen> {
                 ),
                 centerTitle: true,
               ),
-              body: ListView(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   player,
                   Padding(
@@ -135,24 +137,7 @@ class _TrailerScreenState extends State<TrailerScreen> {
                               "Volume",
                               style: TextStyle(fontWeight: FontWeight.w300),
                             ),
-                            Expanded(
-                              child: Slider(
-                                inactiveColor: Colors.transparent,
-                                value: _volume,
-                                min: 0.0,
-                                max: 100.0,
-                                divisions: 10,
-                                label: '${(_volume).round()}',
-                                onChanged: _isPlayerReady
-                                    ? (value) {
-                                        setState(() {
-                                          _volume = value;
-                                        });
-                                        _controller.setVolume(_volume.round());
-                                      }
-                                    : null,
-                              ),
-                            ),
+                            _volumeSlider(),
                           ],
                         ),
                       ],
@@ -162,6 +147,27 @@ class _TrailerScreenState extends State<TrailerScreen> {
               ),
             ),
           );
+  }
+
+  Expanded _volumeSlider() {
+    return Expanded(
+      child: Slider(
+        inactiveColor: Colors.transparent,
+        value: _volume,
+        min: 0.0,
+        max: 100.0,
+        divisions: 10,
+        label: '${(_volume).round()}',
+        onChanged: _isPlayerReady
+            ? (value) {
+                setState(() {
+                  _volume = value;
+                });
+                _controller.setVolume(_volume.round());
+              }
+            : null,
+      ),
+    );
   }
 
   Widget get _space => const SizedBox(height: 10);

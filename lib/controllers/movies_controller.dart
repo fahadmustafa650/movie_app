@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/constants/strings.dart';
@@ -12,39 +13,27 @@ import '../services/apis/networking.dart';
 
 class MoviesController extends GetxController {
   final _isMoviesLoading = false.obs;
-  final _isErrorExist = false.obs;
+  final searchController = TextEditingController();
   final searchText = "".obs;
-  final _errorMsg = "".obs;
+
   final _networking = GetIt.I<NetWorkingManager>();
   final moviesResultList = <MovieResult>[].obs;
-  //---------------------------------
-  @override
-  void onInit() {
-    _fetchAndGetAllMovies();
-    super.onInit();
-  }
 
   //---------------------------------
   bool get isFetchingMovies => _isMoviesLoading.value;
+
   //---------------------------------
-  bool get hasError => _isErrorExist.value;
-  //---------------------------------
-  Future<void> _fetchAndGetAllMovies() async {
+  Future<void> fetchAndGetAllMovies() async {
     _isMoviesLoading.value = true;
 
     try {
       final response = await _networking.apiCall(
         methodCall: MethodCall.get,
-        endpoint: 'now_playing',
-        queryParameters: {
-          'language': 'en-US',
-          'page': 1,
-        },
+        endpoint: '3/movie/upcoming',
       );
 
       if (response == null || response.statusCode == null) {
         _isMoviesLoading.value = false;
-        _errorMsg.value = MyStrings.someWWrong;
         return;
       }
 
@@ -58,19 +47,19 @@ class MoviesController extends GetxController {
         _isMoviesLoading.value = false;
       }
     } on DioException catch (error) {
-      _errorMsg.value = "${error.message}";
+      if (kDebugMode) {
+        print("fetchAndGetAllMovies:DioException:error:${error.runtimeType}");
+      }
       _isMoviesLoading.value = false;
-      _isErrorExist.value = false;
       rethrow;
     } on TimeoutException catch (_) {
-      _errorMsg.value = MyStrings.connTimeout;
       _isMoviesLoading.value = false;
-      _isErrorExist.value = false;
       rethrow;
     } catch (error) {
+      if (kDebugMode) {
+        print("fetchAndGetAllMovies:catch:${error.runtimeType}");
+      }
       _isMoviesLoading.value = false;
-      _isErrorExist.value = false;
-      _errorMsg.value = MyStrings.someWWrong;
       rethrow;
     }
   }

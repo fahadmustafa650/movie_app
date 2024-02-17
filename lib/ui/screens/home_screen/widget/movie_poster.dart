@@ -16,12 +16,11 @@ class MovieTitlePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const margin =
-        EdgeInsets.only(bottom: 10.0, left: 20.0, right: 20.0, top: 20.0);
-    const padding = EdgeInsets.only(bottom: 30.0);
+        EdgeInsets.only(bottom: 5.0, left: 20.0, right: 20.0, top: 20.0);
+    // const padding = EdgeInsets.only(bottom: 30.0);
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        // color: Colors.amber,
+      child: Container(
         width: Get.width * 0.9,
         height: 200.0,
         child: Stack(
@@ -29,18 +28,20 @@ class MovieTitlePoster extends StatelessWidget {
             Container(
               width: Get.width * 0.9,
               margin: margin,
-              padding: padding,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: FadeInImage.assetNetwork(
-                placeholder: MyAssets.posterHolder,
-                fit: BoxFit.cover,
-                image: CommonMethods.getPosterUrlByPath(movieResult.posterPath),
+              // padding: padding,
+
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: FadeInImage.assetNetwork(
+                  placeholder: MyAssets.posterHolder,
+                  fit: BoxFit.cover,
+                  image:
+                      CommonMethods.getPosterUrlByPath(movieResult.posterPath),
+                ),
               ),
             ),
             Align(
-              alignment: Alignment(0.0, 0.5),
+              alignment: const Alignment(0.0, 0.5),
               child: Text(
                 movieResult.originalTitle,
                 style:
@@ -51,11 +52,5 @@ class MovieTitlePoster extends StatelessWidget {
         ),
       ),
     );
-    // child: Align(
-    //     alignment: Alignment.bottomCenter,
-    //     child: Text(
-    //       movieResult.originalTitle,
-    //       style: const TextStyle(color: MyColors.whiteColor, fontSize: 25.0),
-    //     )),
   }
 }

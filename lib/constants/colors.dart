@@ -6,5 +6,6 @@ class MyColors {
   static const grayColor = Colors.grey;
   static const lightGrayColor = Color(0xffeeeced);
   static const lightBlueColor = Colors.lightBlue;
+  static const redColor = Colors.red;
   static const whiteColor = Colors.white;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/models/movie_model.dart';
 
@@ -22,16 +23,36 @@ class MovieDetailsScreen extends StatelessWidget {
             TopMoviePoster(
               movieUrl:
                   CommonMethods.getPosterUrlByPath(movieResult.posterPath),
-              onPressTicketBtn: () {},
-              onPressTrailerBtn: () {
+              onPressTopBtn: () {},
+              onPressBottomBtn: () {
                 Get.to(() => TrailerScreen(movieResult: movieResult));
               },
             ),
             const SizedBox(
               height: 20.0,
             ),
-            Row(
-              children: [],
+            Container(
+              alignment: Alignment.topLeft,
+              margin: const EdgeInsets.only(left: 20.0),
+              child: const Text(
+                MyStrings.overview,
+                style: TextStyle(
+                  color: MyColors.blackColor,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 8.0),
+              child: Text(
+                movieResult.overview,
+                style:
+                    const TextStyle(color: MyColors.grayColor, fontSize: 16.0),
+              ),
             )
           ],
         ),

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/controllers/movies_controller.dart';
-import 'package:movie_app/models/movie_model.dart';
+import 'package:movie_app/ui/screens/movie_details/view/movie_details_screen.dart';
 import 'package:movie_app/ui/screens/searched_screen/widget/movie_poster_row.dart';
 
 class SearchedScreen extends StatelessWidget {
@@ -21,13 +21,14 @@ class SearchedScreen extends StatelessWidget {
           const SizedBox(
             height: 10.0,
           ),
+          //Heading Showing No of Results
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Obx(
                 () => Text(
-                  "Result found: ${movieController.filterMovies(movieController.searchText.value).length}",
+                  "${MyStrings.resFound} ${movieController.filterMovies(movieController.searchText.value).length}",
                   style: const TextStyle(
                       fontSize: 20.0, fontWeight: FontWeight.w600),
                 ),
@@ -37,16 +38,22 @@ class SearchedScreen extends StatelessWidget {
           const SizedBox(
             height: 15.0,
           ),
+          //Result Found Movies
           Expanded(
             child: Obx(
               () => ListView.builder(
-                  itemCount: movieController
-                      .filterMovies(movieController.searchText.value)
-                      .length,
-                  itemBuilder: (ctx, index) => MoviePosterRow(
-                        movieResult: movieController.filterMovies(
-                            movieController.searchText.value)[index],
-                      )),
+                itemCount: movieController
+                    .filterMovies(movieController.searchText.value)
+                    .length,
+                itemBuilder: (ctx, index) => MoviePosterRow(
+                  movieResult: movieController
+                      .filterMovies(movieController.searchText.value)[index],
+                  onTap: () {
+                    Get.to(() => MovieDetailsScreen(
+                        movieResult: movieController.moviesResultList[index]));
+                  },
+                ),
+              ),
             ),
           ),
         ],

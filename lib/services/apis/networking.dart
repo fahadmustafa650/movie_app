@@ -29,7 +29,7 @@ class NetWorkingManager {
     _dio!.interceptors.add(
       InterceptorsWrapper(onRequest: (request, handler) async {
         String? token =
-            "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZjI1MjY2NTRjMTEwZTRiNDYwODFhODlmMDJkYmEzNyIsInN1YiI6IjY1Y2I5YzNkNWJlMDBlMDE3Y2FkNTJhMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.DUrlNkXF7oJP3sEb37Qa3KODJ0-1IJqdsmM_2Jg4Z7o";
+            ApiConstants.kToken;
 
         if (token == null) {
           return handler.next(request);

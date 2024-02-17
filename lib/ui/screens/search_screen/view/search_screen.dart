@@ -1,19 +1,14 @@
-import 'dart:ffi';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/controllers/movies_controller.dart';
-import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/services/apis/api_constants.dart';
-import 'package:movie_app/ui/screens/searched_screen/view/searched_screen.dart';
+import 'package:movie_app/ui/screens/movie_details/view/movie_details_screen.dart';
+import 'package:movie_app/ui/screens/search_screen/widget/movie_grid_poster.dart';
 import 'package:movie_app/ui/screens/searching_screen/view/searching_screen.dart';
-import 'package:movie_app/utils/common_methods.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({super.key});
+  const SearchScreen({super.key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -35,36 +30,47 @@ class _SearchScreenState extends State<SearchScreen> {
           Expanded(
               child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: GetX<MoviesController>(builder: (controller) {
-              if (controller.isFetchingMovies) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 15.0,
-                ),
-                itemCount:
-                    controller.filterMovies(controller.searchText.value).length,
-                itemBuilder: (ctx, index) => MovieGridPoster(
-                  movieResult: controller
-                      .filterMovies(controller.searchText.value)[index],
-                ),
-              );
-            }),
+            child: FutureBuilder(
+                future: moviesController.fetchAndGetAllMovies(),
+                builder: (ctx, snapshot) {
+                  return Obx(
+                    () => GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 15.0,
+                      ),
+                      itemCount: moviesController
+                          .filterMovies(moviesController.searchText.value)
+                          .length,
+                      itemBuilder: (ctx, index) => MovieGridPoster(
+                        movieResult: moviesController.filterMovies(
+                            moviesController.searchText.value)[index],
+                        onTap: () {
+                          //
+                          Get.to(() => MovieDetailsScreen(
+                              movieResult:
+                                  moviesController.moviesResultList[index]));
+                        },
+                      ),
+                    ),
+                  );
+                }),
           ))
         ],
       ),
     ));
   }
 
+  //-----------------------------------------------------------
   Padding _searchTextField() {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 10.0),
       child: SizedBox(
         height: 45.0,
         child: TextFormField(
+          controller: moviesController.searchController,
           onChanged: (value) {
             moviesController.searchText.value = value;
             if (value.isEmpty) {
@@ -97,34 +103,6 @@ class _SearchScreenState extends State<SearchScreen> {
               )),
         ),
       ),
-    );
-  }
-}
-
-class MovieGridPoster extends StatelessWidget {
-  final MovieResult movieResult;
-  const MovieGridPoster({super.key, required this.movieResult});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200.0,
-      height: 100.0,
-      padding: const EdgeInsets.only(bottom: 20.0, left: 15.0),
-      decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(
-                CommonMethods.getPosterUrlByPath(movieResult.posterPath)),
-            fit: BoxFit.cover,
-          ),
-          // color: Colors.red,
-          borderRadius: BorderRadius.circular(20.0)),
-      child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Text(
-            movieResult.originalTitle,
-            style: const TextStyle(fontSize: 25.0, color: MyColors.whiteColor),
-          )),
     );
   }
 }

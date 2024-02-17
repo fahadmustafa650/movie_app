@@ -5,13 +5,13 @@ import 'package:movie_app/constants/strings.dart';
 import '../../../../constants/colors.dart';
 
 class TopMoviePoster extends StatelessWidget {
-  final void Function()? onPressTicketBtn;
-  final void Function()? onPressTrailerBtn;
+  final void Function()? onPressTopBtn;
+  final void Function()? onPressBottomBtn;
   final String movieUrl;
   const TopMoviePoster({
     super.key,
-    required this.onPressTicketBtn,
-    required this.onPressTrailerBtn,
+    required this.onPressTopBtn,
+    required this.onPressBottomBtn,
     required this.movieUrl,
   });
 
@@ -57,7 +57,7 @@ class TopMoviePoster extends StatelessWidget {
                       )),
                       backgroundColor:
                           MaterialStateProperty.all(MyColors.lightBlueColor)),
-                  onPressed: onPressTicketBtn,
+                  onPressed: onPressTopBtn,
                   child: const Text(
                     MyStrings.getTkt,
                     style: TextStyle(color: MyColors.whiteColor),
@@ -73,7 +73,7 @@ class TopMoviePoster extends StatelessWidget {
                                   color: MyColors.lightBlueColor))),
                       backgroundColor:
                           MaterialStateProperty.all(Colors.transparent)),
-                  onPressed: onPressTrailerBtn,
+                  onPressed: onPressBottomBtn,
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

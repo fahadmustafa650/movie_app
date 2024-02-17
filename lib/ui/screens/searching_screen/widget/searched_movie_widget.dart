@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/models/movie_model.dart';
+import 'package:movie_app/utils/common_methods.dart';
 
 class SearchedMovieWidget extends StatelessWidget {
   final MovieResult movieResult;
+  final void Function()? onTap;
   const SearchedMovieWidget({
     super.key,
     required this.movieResult,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 0.0),
+    return GestureDetector(
+      onTap: onTap,
       child: Row(
         children: [
           Container(
@@ -22,8 +25,10 @@ class SearchedMovieWidget extends StatelessWidget {
             margin: const EdgeInsets.only(left: 10.0, bottom: 10.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.0),
-                image: const DecorationImage(
-                    image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+                image: DecorationImage(
+                    image: NetworkImage(CommonMethods.getPosterUrlByPath(
+                        movieResult.posterPath)),
+                    fit: BoxFit.cover)),
             // child: Image.network(imageUrl, fit: BoxFit.cover),
           ),
           const SizedBox(
@@ -44,7 +49,7 @@ class SearchedMovieWidget extends StatelessWidget {
                   movieResult.overview,
                   maxLines: 3,
                   overflow: TextOverflow.fade,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 10.0,
                       color: MyColors.grayColor,
                       fontWeight: FontWeight.bold),
