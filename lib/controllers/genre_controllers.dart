@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/models/genre_model.dart';
@@ -6,7 +5,7 @@ import 'package:movie_app/services/apis/networking.dart';
 
 class GenreControllers extends GetxController {
   final _networking = GetIt.I<NetWorkingManager>();
-  final genresList = <Genres>[].obs;
+  final _genresList = <Genres>[].obs;
 
   @override
   void onInit() {
@@ -18,7 +17,7 @@ class GenreControllers extends GetxController {
   Future<void> fetchAndGetAllGenres() async {
     //In case Genres are already loaded no need to load again
 
-    if (genresList.isNotEmpty) {
+    if (_genresList.isNotEmpty) {
       return;
     }
     try {
@@ -34,11 +33,13 @@ class GenreControllers extends GetxController {
       if (response.statusCode! <= 201) {
         final extractedData = response.data;
         final genre = Genre.fromJson(extractedData);
-        genresList.value = genre.genres!;
+        _genresList.value = genre.genres!;
       }
     } catch (e) {
       rethrow;
     }
   }
+
   //----------------------------------------------------------------------
+  List<Genres> get allGenres => _genresList.value;
 }

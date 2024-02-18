@@ -97,9 +97,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   color: MyColors.grayColor,
                 ),
               ),
-              suffixIcon: const Icon(
-                Icons.close,
-                color: MyColors.grayColor,
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  moviesController.searchController.clear();
+                },
+                child: const Icon(
+                  Icons.close,
+                  color: MyColors.grayColor,
+                ),
               )),
         ),
       ),

@@ -6,9 +6,16 @@ import 'package:movie_app/ui/screens/movie_details/view/movie_details_screen.dar
 import 'package:movie_app/ui/screens/searched_screen/view/searched_screen.dart';
 import 'package:movie_app/ui/screens/searching_screen/widget/searched_movie_widget.dart';
 
-class SearchingScreen extends StatelessWidget {
-  SearchingScreen({super.key});
+class SearchingScreen extends StatefulWidget {
+  const SearchingScreen({super.key});
+
+  @override
+  State<SearchingScreen> createState() => _SearchingScreenState();
+}
+
+class _SearchingScreenState extends State<SearchingScreen> {
   final moviesController = Get.put(MoviesController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,7 +50,8 @@ class SearchingScreen extends StatelessWidget {
   //----------------------------------------------------------------
   TextFormField _searchField() {
     return TextFormField(
-      initialValue: moviesController.searchText.value,
+      // initialValue: moviesController.searchText.value,
+      controller: moviesController.searchController,
       onChanged: (value) {
         moviesController.searchText.value = value;
       },
@@ -60,9 +68,16 @@ class SearchingScreen extends StatelessWidget {
             color: MyColors.grayColor,
           ),
         ),
-        suffixIcon: const Icon(
-          Icons.close,
-          color: MyColors.grayColor,
+        suffixIcon: GestureDetector(
+          onTap: () {
+            moviesController.searchController.clear();
+            moviesController.searchText.value = '';
+            // setState(() {});
+          },
+          child: const Icon(
+            Icons.close,
+            color: MyColors.grayColor,
+          ),
         ),
         border: InputBorder.none,
       ),

@@ -15,7 +15,7 @@ class VideoController {
 
       final response = await _networking.apiCall(
         methodCall: MethodCall.get,
-        endpoint: '$movieId/videos',
+        endpoint: '3/movie/$movieId/videos',
         queryParameters: {
           'language': 'en-US',
         },
@@ -39,7 +39,6 @@ class VideoController {
           .toList()
           .first;
       videoId = videoId + trailerVideo.key!;
-      print("videoUrl:$videoId");
       _isVideoLoading.value = false;
       return '';
     } catch (error) {

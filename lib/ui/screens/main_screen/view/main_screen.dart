@@ -20,8 +20,12 @@ class MainScreen extends StatelessWidget {
             children: [
               HomeScreen(),
               SearchScreen(),
-              Container(),
-              Container(),
+              Container(
+                child: Center(child: Text("Favorite")),
+              ),
+              Container(
+                child: Center(child: Text("Account")),
+              ),
             ],
           ),
         ),
