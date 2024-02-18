@@ -4,6 +4,7 @@ import 'package:movie_app/constants/colors.dart';
 import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/controllers/genre_controllers.dart';
 import 'package:movie_app/models/movie_model.dart';
+import 'package:movie_app/ui/screens/movie_details/widget/display_genre.dart';
 
 import 'package:movie_app/ui/screens/movie_details/widget/top_movie_poster.dart';
 import 'package:movie_app/ui/screens/trailer_screen/view/trailer_screen.dart';
@@ -48,33 +49,8 @@ class MovieDetailsScreen extends StatelessWidget {
             SizedBox(
               height: 15.0,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: SizedBox(
-                height: 40.0,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: movieResult.genreIds.length,
-                  itemBuilder: (ctx, index) {
-                    return Container(
-                      padding: EdgeInsets.all(12.0),
-                      margin: EdgeInsets.only(right: 5.0),
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: Center(
-                          child: Text(
-                        genreController.allGenres
-                            .firstWhere((element) =>
-                                element.id == movieResult.genreIds[index])
-                            .name!,
-                        style: TextStyle(color: Colors.white),
-                      )),
-                    );
-                  },
-                ),
-              ),
-            ),
+            DisplayGenresListView(
+                movieResult: movieResult, genreController: genreController),
             SizedBox(
               height: 15.0,
             ),

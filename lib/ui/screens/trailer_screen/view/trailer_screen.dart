@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:movie_app/constants/colors.dart';
+import 'package:movie_app/constants/strings.dart';
 import 'package:movie_app/controllers/video_controller.dart';
 import 'package:movie_app/models/movie_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -24,7 +25,6 @@ class _TrailerScreenState extends State<TrailerScreen> {
   // late PlayerState _playerState;
   late YoutubeMetaData _videoMetaData;
   double _volume = 100;
-  bool _muted = false;
   bool _isPlayerReady = false;
 
   @override
@@ -108,8 +108,7 @@ class _TrailerScreenState extends State<TrailerScreen> {
                 _isPlayerReady = true;
               },
               onEnded: (data) {
-                print("onEnded");
-                // _controller.load(widget.trailerId);
+                //On Ending Video Navigating Back
                 Get.back();
               },
             ),
@@ -134,7 +133,7 @@ class _TrailerScreenState extends State<TrailerScreen> {
                         Row(
                           children: <Widget>[
                             const Text(
-                              "Volume",
+                              MyStrings.vol,
                               style: TextStyle(fontWeight: FontWeight.w300),
                             ),
                             _volumeSlider(),
@@ -171,25 +170,4 @@ class _TrailerScreenState extends State<TrailerScreen> {
   }
 
   Widget get _space => const SizedBox(height: 10);
-
-  void _showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontWeight: FontWeight.w300,
-            fontSize: 16.0,
-          ),
-        ),
-        backgroundColor: Colors.blueAccent,
-        behavior: SnackBarBehavior.floating,
-        elevation: 1.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.0),
-        ),
-      ),
-    );
-  }
 }

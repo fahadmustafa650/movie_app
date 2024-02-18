@@ -27,5 +27,6 @@ class MyStrings {
   static const search = 'Search';
   static const searchMov = "Search Movies";
   static const unSub = "Unsubscribe";
+  static const vol = "Volume";
   static const watch = "Watch";
 }
