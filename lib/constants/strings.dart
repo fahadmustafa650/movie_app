@@ -14,6 +14,7 @@ class MyStrings {
   static const favrt = 'Favourite';
   static const intServError = 'Internal server error';
   static const getTkt = "Get Tickets";
+  static const genres = "Genres";
   static const home = 'Home';
   static const overview = 'Overview';
   static const reqApiSerCanc = "Request to API server was cancelled";

@@ -17,7 +17,7 @@ class NetWorkingManager {
 
   NetWorkingManager._internal() {
     _options = BaseOptions(
-      baseUrl: ApiConstants.kBaseUrl,
+      baseUrl: ApiConstants.kBaseUrl!,
       //Bug# this 15 seconds gap added to handle api response time
       receiveDataWhenStatusError: true,
       connectTimeout: const Duration(seconds: 15),
@@ -28,8 +28,7 @@ class NetWorkingManager {
 
     _dio!.interceptors.add(
       InterceptorsWrapper(onRequest: (request, handler) async {
-        String? token =
-            ApiConstants.kToken;
+        String? token = ApiConstants.kToken;
 
         if (token == null) {
           return handler.next(request);

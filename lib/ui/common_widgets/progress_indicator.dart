@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/constants/colors.dart';
 
-class CustomProgressIndicator extends StatelessWidget {
-  const CustomProgressIndicator({
+class CenteredProgressIndicator extends StatelessWidget {
+  const CenteredProgressIndicator({
     super.key,
   });
 

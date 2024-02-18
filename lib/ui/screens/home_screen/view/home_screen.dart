@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             future: moviesController.fetchAndGetAllMovies(),
             builder: (ctx, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CustomProgressIndicator();
+                return const CenteredProgressIndicator();
               }
               if (snapshot.hasError) {
                 return ErrorMsgContainer(

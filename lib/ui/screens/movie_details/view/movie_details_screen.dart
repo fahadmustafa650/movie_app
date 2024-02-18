@@ -8,7 +8,6 @@ import 'package:movie_app/ui/screens/movie_details/widget/display_genre.dart';
 
 import 'package:movie_app/ui/screens/movie_details/widget/top_movie_poster.dart';
 import 'package:movie_app/ui/screens/trailer_screen/view/trailer_screen.dart';
-import 'package:movie_app/ui/screens/trailer_screen/view/trailer_screen.dart';
 import 'package:movie_app/utils/common_methods.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
@@ -41,17 +40,18 @@ class MovieDetailsScreen extends StatelessWidget {
             Container(
               alignment: Alignment.topLeft,
               margin: const EdgeInsets.only(left: 20.0),
-              child: Text(
-                "Genres",
+              child: const Text(
+                MyStrings.genres,
                 style: textStyle,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
+            //Genres Lists
             DisplayGenresListView(
                 movieResult: movieResult, genreController: genreController),
-            SizedBox(
+            const SizedBox(
               height: 15.0,
             ),
             Container(
